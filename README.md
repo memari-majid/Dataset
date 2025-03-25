@@ -1,113 +1,157 @@
-# Fire Detection Dataset Analysis
+# Fire Detection Dataset Analysis 🔥
 
-This repository contains analysis and documentation for a fire detection dataset used in computer vision tasks. The dataset has been analyzed for duplicates and quality issues.
+[![Python](https://img.shields.io/badge/python-v3.8+-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Dataset](https://img.shields.io/badge/dataset-analysis-orange.svg)](https://github.com/memari-majid/Dataset)
 
-## Dataset Overview
+A comprehensive analysis tool for identifying and managing duplicates in fire detection datasets, specifically designed for YOLO-format datasets used in computer vision tasks.
 
-The dataset is organized in a YOLO format with the following structure:
+## 📋 Table of Contents
+- [Fire Detection Dataset Analysis 🔥](#fire-detection-dataset-analysis-)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [🔍 Overview](#-overview)
+  - [📁 Dataset Structure](#-dataset-structure)
+  - [📊 Key Findings](#-key-findings)
+    - [Dataset Statistics](#dataset-statistics)
+    - [Split Distribution](#split-distribution)
+  - [⚙️ Installation](#️-installation)
+  - [🚀 Usage](#-usage)
+  - [📈 Detailed Analysis](#-detailed-analysis)
+    - [Duplication Issues](#duplication-issues)
+    - [Quality Assessment](#quality-assessment)
+  - [🛠️ Recommendations](#️-recommendations)
+    - [Immediate Actions](#immediate-actions)
+    - [Long-term Improvements](#long-term-improvements)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
+  - [📫 Contact](#-contact)
+
+## 🔍 Overview
+
+This repository provides tools and analysis for a fire detection dataset, focusing on identifying duplicates and quality issues that could impact model training. The analysis reveals significant duplication across dataset splits, which could compromise model performance.
+
+## 📁 Dataset Structure
+
+The dataset follows the YOLO format organization:
 ```
 Dataset/
-├── train/
-│   ├── images/
-│   └── labels/
-├── val/
-│   ├── images/
-│   └── labels/
-└── test/
-    ├── images/
-    └── labels/
+├── train/          # Training set
+│   ├── images/     # Training images
+│   └── labels/     # YOLO format annotations
+├── val/            # Validation set
+│   ├── images/     # Validation images
+│   └── labels/     # YOLO format annotations
+└── test/           # Test set
+    ├── images/     # Test images
+    └── labels/     # YOLO format annotations
 ```
 
-## Dataset Statistics
+## 📊 Key Findings
 
-- Total Images: 18,173
-- Total Annotations: 9,175
-- Unique Image Sizes: 9,622
-- Unique Annotations: 5,404
+### Dataset Statistics
+| Metric | Count |
+|--------|--------|
+| Total Images | 18,173 |
+| Total Annotations | 9,175 |
+| Unique Images | 9,622 |
+| Unique Annotations | 5,404 |
+| Duplication Rate | ~41% |
 
-## Duplicate Analysis Findings
+### Split Distribution
+| Split | Images | Annotations |
+|-------|---------|-------------|
+| Training | 7,483 | 3,771 |
+| Validation | 8,552 | 4,312 |
+| Test | 2,138 | 1,092 |
 
-### 1. Image Duplication
-- Exact Image Duplicates: 7,482 instances
-- Size-based Duplicates: 7,039 instances
-- Approximately 41% of all images are duplicates
+## ⚙️ Installation
 
-### 2. Annotation Duplication
-- Duplicate Annotations: 3,771 instances
-- About 41% of all annotations are duplicates
+1. Clone the repository:
+```bash
+git clone https://github.com/memari-majid/Dataset.git
+cd Dataset
+```
 
-### 3. Split Distribution
-- Training Set:
-  - Images: 7,483
-  - Annotations: 3,771
-- Validation Set:
-  - Images: 8,552
-  - Annotations: 4,312
-- Test Set:
-  - Images: 2,138
-  - Annotations: 1,092
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-## Critical Issues Identified
+## 🚀 Usage
 
-### 1. Cross-Split Duplication
-- Many images appear in both training and validation sets
-- Some images appear in all three splits
-- The validation set contains more images than the training set
+Run the analysis script:
+```bash
+python analyze_dataset.py
+```
 
-### 2. Annotation Consistency
-- All annotations follow YOLO format
-- All annotations are for class 0
-- Coordinates are properly normalized (0-1 range)
+The script will generate a detailed report of duplicates and dataset statistics.
 
-### 3. File Size Patterns
-- High number of files with identical sizes (7,039 instances)
-- Suggests systematic duplication rather than random occurrences
+## 📈 Detailed Analysis
 
-## Impact on Model Training
+### Duplication Issues
+1. **Image Duplication**
+   - 7,482 exact image duplicates identified
+   - 7,039 size-based duplicates found
+   - 41% overall duplication rate
 
-1. **Training Impact**:
-   - Model performance metrics may be inflated
-   - Risk of overfitting to duplicated data
-   - Training efficiency is compromised
+2. **Annotation Duplication**
+   - 3,771 duplicate annotations detected
+   - Consistent YOLO format across all annotations
+   - All annotations use class index 0
 
-2. **Validation Impact**:
-   - Validation set is contaminated with training data
-   - Model evaluation is not meaningful
-   - Performance metrics are not representative
+3. **Cross-Split Contamination**
+   - Significant overlap between training and validation sets
+   - Validation set larger than training set (unusual)
+   - Some images present in all three splits
 
-3. **Test Impact**:
-   - Some test data may overlap with training/validation
-   - Final performance metrics may be unreliable
+### Quality Assessment
+- ✅ Proper YOLO format annotations
+- ✅ Normalized coordinates (0-1 range)
+- ❌ High duplication rate
+- ❌ Improper split distribution
 
-## Recommendations
+## 🛠️ Recommendations
 
-1. **Dataset Cleaning**:
-   - Remove all duplicates from validation set
-   - Ensure each image appears in only one split
-   - Create a proper random split of the data
+### Immediate Actions
+1. **Remove Duplicates**
+   - Eliminate cross-split duplications
+   - Ensure unique images in each split
+   - Maintain data integrity
 
-2. **Dataset Reorganization**:
-   - Implement a proper train/val/test split strategy
-   - Use a random seed for reproducibility
-   - Maintain the same annotation format and quality
+2. **Rebalance Splits**
+   - Implement proper train/val/test ratios (e.g., 70/20/10)
+   - Ensure random and stratified splitting
+   - Verify no cross-contamination
 
-3. **Quality Control**:
-   - Implement checks to prevent future duplication
-   - Add validation steps in the data pipeline
-   - Document the split creation process
+3. **Quality Control**
+   - Implement automated duplicate checking
+   - Add data pipeline validation
+   - Document all data processing steps
 
-## Usage
+### Long-term Improvements
+- Implement version control for dataset changes
+- Create automated quality checks
+- Establish clear data collection guidelines
 
-This dataset should be cleaned and reorganized before use in model training. The current state of duplication, particularly in the validation set, makes it unsuitable for model training and evaluation.
+## 🤝 Contributing
 
-## License
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-[Add your license information here]
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Contributing
+## 📄 License
 
-[Add contribution guidelines here]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact
+## 📫 Contact
 
-[Add contact information here] 
+Majid Memari - [@GitHub](https://github.com/memari-majid)
+
+Project Link: [https://github.com/memari-majid/Dataset](https://github.com/memari-majid/Dataset)
+
+---
+⭐️ If you find this analysis helpful, please consider giving it a star!
