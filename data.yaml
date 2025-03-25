@@ -1,0 +1,7 @@
+names:
+- fire
+nc: 1
+
+train: C:\Users\falls\OneDrive\Desktop\Fire\Dataset\train
+val: C:\Users\falls\OneDrive\Desktop\Fire\Dataset\val
+test: C:\Users\falls\OneDrive\Desktop\Fire\Dataset\test

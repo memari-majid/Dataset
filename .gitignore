@@ -1,0 +1,87 @@
+# Dataset directories
+train/
+val/
+test/
+runs/
+
+# Dataset files
+*.jpg
+*.jpeg
+*.png
+*.txt
+*.pt
+*.pth
+*.weights
+*.onnx
+*.tflite
+*.pb
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
+.venv
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# Analysis reports
+dataset_analysis_report.json
+*.csv
+*.xlsx
+*.xls
+
+# Model checkpoints and weights
+checkpoints/
+weights/
+*.h5
+*.hdf5
+*.pkl
+*.model
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# System Files
+.DS_Store
+Thumbs.db 
