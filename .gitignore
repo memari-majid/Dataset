@@ -84,4 +84,6 @@ weights/
 
 # System Files
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Allow requirements.txt 
